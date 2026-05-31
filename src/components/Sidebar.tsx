@@ -16,18 +16,15 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
       <div className="mb-6 border border-outline-variant p-3 bg-surface-container-lowest relative">
         <div className="hud-border::before top-[-1px] left-[-1px] w-2 h-2 border-t border-l border-primary-fixed-dim absolute"></div>
         <div className="hud-border::after bottom-[-1px] right-[-1px] w-2 h-2 border-b border-r border-primary-fixed-dim absolute"></div>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border border-primary-fixed-dim flex items-center justify-center bg-background relative corner-bracket overflow-hidden">
-            <span className="material-symbols-outlined text-primary-fixed-dim absolute z-10 text-[24px]">
-              person
-            </span>
-            <div className="absolute inset-0 bg-primary-fixed-dim opacity-10"></div>
+        <div className="flex items-center gap-4">
+          <div className="w-28 h-10 rounded-full overflow-hidden border-2 border-secondary-fixed bg-surface-container-lowest relative shadow-[0_0_0_8px_rgba(16,185,129,0.14)]">
+            <img src="/ghost.jpg" alt="Anant Tirupati profile" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h2 className="text-label-md font-mono text-secondary-fixed tracking-widest font-semibold">
+            <h2 className="text-label-sm font-mono text-secondary-fixed tracking-widest font-semibold">
               ANANT_TIRUPATI
             </h2>
-            <p className="text-label-sm font-mono text-on-surface-variant uppercase tracking-widest mt-0.5">
+            <p className="text-xs font-mono text-on-surface-variant uppercase tracking-widest mt-0.5">
               FULL-STACK // AI BUILDER
             </p>
           </div>

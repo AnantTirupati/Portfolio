@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anant Tirupati — Portfolio
 
-## Getting Started
+Personal portfolio website showcasing projects, skills, and contact information.
 
-First, run the development server:
+Built with Next.js, TypeScript and Tailwind CSS. The site features a compact command-center layout, interactive widgets, and a responsive design.
+
+**Live demo:** Deploy this repository to Vercel for an instant preview.
+
+**Tech stack:** Next.js, React, TypeScript, Tailwind CSS
+
+## Features
+
+- Home dashboard with an overview and quick links
+- Skills page listing technical proficiencies
+- Logs page (activity / notes)
+- Loadout page for tools / projects
+- Reusable components: `CommandCenterLayout`, `TerminalWidget`, `ContactModal`, `Sidebar`, `TopNavbar`, `Footer`
+
+## Local development
+
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build for production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/` — app routes and pages
+- `src/components/` — shared UI components (see `CommandCenterLayout.tsx`, `TerminalWidget.tsx`, `ContactModal.tsx`)
+- `public/` — static assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recommended: Vercel (automatic Next.js support). Connect your GitHub repo and deploy the `main` branch.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you'd like to contribute or suggest changes, open an issue or submit a pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+Want to reach out? Use the contact modal on the site or open an issue on this repository.
+
+---
+
+Created by Anant Tirupati.

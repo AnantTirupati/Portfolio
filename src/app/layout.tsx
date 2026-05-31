@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description: "Tactical mission-critical operations dashboard, player portfolio, and professional hub of Anant Tirupati - Full Stack Engineer, AI Specialist, and Tech Competitor.",
   keywords: ["Anant Tirupati", "Command Center", "Full Stack Developer", "AI Specialist", "Cyber Brutalist Portfolio"],
   authors: [{ name: "Anant Tirupati" }],
+  icons: {
+    icon: "/ghost.jpg",
+    apple: "/ghost.jpg",
+  },
 };
 
 export const viewport: Viewport = {
@@ -34,6 +38,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/ghost.jpg" />
       </head>
       <body className="font-sans antialiased min-h-full bg-background text-on-surface">
         <CommandCenterLayout>{children}</CommandCenterLayout>
