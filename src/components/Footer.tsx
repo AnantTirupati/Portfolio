@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-8 h-8 bg-background/90 backdrop-blur-md border-t border-outline-variant text-on-surface-variant font-mono text-label-sm">
+    <footer className="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-4 md:px-8 h-8 bg-background/90 backdrop-blur-md border-t border-outline-variant text-on-surface-variant font-mono text-[9px] xs:text-[10px] sm:text-xs">
       <div className="font-bold text-on-surface">
         © 2025 ANANT_TIRUPATI // BUILD_V4.2.0
       </div>
-      <div className="flex gap-4">
+      <div className="hidden sm:flex gap-4">
         <a
           href="https://www.linkedin.com/in/ananttirupati/"
           target="_blank"

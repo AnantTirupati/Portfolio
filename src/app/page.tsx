@@ -67,27 +67,27 @@ export default function HQPage() {
       </div>
 
       {/* HQ Welcome Dashboard Hero */}
-      <div className="max-w-[1000px] w-full mx-auto relative z-10 flex flex-col items-center text-center mt-12 md:mt-0 p-8 tech-frame backdrop-blur-sm">
+      <div className="max-w-[1000px] w-full mx-auto relative z-10 flex flex-col items-center text-center mt-6 md:mt-0 p-4 xs:p-6 sm:p-8 tech-frame backdrop-blur-sm">
         <div className="mb-4 inline-flex items-center gap-2 border border-secondary-fixed-dim text-secondary-fixed-dim px-3 py-1 text-label-sm font-mono hud-border bg-surface-container-highest/80 backdrop-blur">
           <span className="w-2 h-2 bg-secondary-fixed-dim rounded-none glow-secondary animate-pulse"></span>
           SYSTEM_ONLINE
         </div>
         
-        <h1 className="text-display-lg font-mono text-primary-fixed-dim mb-3 uppercase tracking-tighter breathe-primary drop-shadow-[0_0_12px_rgba(0,218,243,0.7)] font-bold text-[36px] sm:text-[48px]">
+        <h1 className="text-display-lg font-mono text-primary-fixed-dim mb-3 uppercase tracking-tighter breathe-primary drop-shadow-[0_0_12px_rgba(0,218,243,0.7)] font-bold text-[24px] xs:text-[32px] sm:text-[44px] md:text-[52px]">
           [ANANT TIRUPATI]
         </h1>
         
-        <h2 className="text-headline-sm sm:text-headline-md font-mono text-on-surface-variant mb-8 uppercase flex flex-wrap items-center justify-center gap-2 tracking-wide text-xs sm:text-sm">
+        <h2 className="text-headline-sm sm:text-headline-md font-mono text-on-surface-variant mb-6 sm:mb-8 uppercase flex flex-wrap items-center justify-center gap-2 tracking-wide text-[10px] xs:text-xs sm:text-sm">
           <span className="text-secondary-fixed-dim opacity-50 font-bold">&lt;</span>
           FULL STACK ENGINEER // AI BUILDER // HACKATHON COMPETITOR
           <span className="text-secondary-fixed-dim opacity-50 font-bold">&gt;</span>
         </h2>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-12 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 w-full sm:w-auto">
           <Link
             href="/logs"
-            className="border border-primary-fixed-dim text-primary-fixed-dim hover:bg-primary-fixed-dim hover:text-background px-8 py-3.5 text-label-md font-mono uppercase transition-all duration-300 glow-primary active:scale-95 flex items-center justify-center gap-2.5 clip-button glow-primary-hover font-semibold cursor-pointer"
+            className="border border-primary-fixed-dim text-primary-fixed-dim hover:bg-primary-fixed-dim hover:text-background px-6 sm:px-8 py-3 text-label-md font-mono uppercase transition-all duration-300 glow-primary active:scale-95 flex items-center justify-center gap-2.5 clip-button glow-primary-hover font-semibold cursor-pointer text-xs sm:text-sm"
           >
             <span className="material-symbols-outlined text-[18px]">visibility</span>
             [VIEW PROJECTS]
@@ -98,7 +98,7 @@ export default function HQPage() {
                 window.dispatchEvent(new Event("open-contact"));
               }
             }}
-            className="border border-outline text-on-surface-variant hover:border-primary-fixed-dim hover:text-primary-fixed-dim px-8 py-3.5 text-label-md font-mono uppercase transition-all duration-300 active:scale-95 flex items-center justify-center gap-2.5 bg-surface-container-low/80 backdrop-blur clip-button hover:bg-surface-container-highest font-semibold cursor-pointer"
+            className="border border-outline text-on-surface-variant hover:border-primary-fixed-dim hover:text-primary-fixed-dim px-6 sm:px-8 py-3 text-label-md font-mono uppercase transition-all duration-300 active:scale-95 flex items-center justify-center gap-2.5 bg-surface-container-low/80 backdrop-blur clip-button hover:bg-surface-container-highest font-semibold cursor-pointer text-xs sm:text-sm"
           >
             <span className="material-symbols-outlined text-[18px]">login</span>
             [ENTER COMMAND CENTER]

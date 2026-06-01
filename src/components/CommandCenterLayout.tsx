@@ -12,6 +12,7 @@ export default function CommandCenterLayout({
   children: React.ReactNode;
 }) {
   const [contactOpen, setContactOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleOpen = () => setContactOpen(true);
@@ -26,11 +27,26 @@ export default function CommandCenterLayout({
       <div className="crt-overlay"></div>
 
       {/* Top Navbar */}
-      <TopNavbar />
+      <TopNavbar sidebarOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
+      {/* Mobile Sidebar backdrop overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-background/60 backdrop-blur-xs z-30 md:hidden cursor-pointer"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       <div className="flex min-h-screen pt-12">
         {/* Navigation Sidebar */}
-        <Sidebar onContactClick={() => setContactOpen(true)} />
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          onContactClick={() => {
+            setContactOpen(true);
+            setSidebarOpen(false);
+          }}
+        />
 
         {/* Dynamic Page Container */}
         <main className="flex-1 md:ml-64 relative flex flex-col justify-between">

@@ -27,8 +27,8 @@ const declassifiedMissions: MissionData[] = [
     icon: "monitor_heart",
     metricsPercent: 100,
     highlights: ["70% reduction in planning time", "Zero transaction failures", "Role-based access control", "JWT Edge Middleware"],
-    githubUrl: "https://github.com/ananttirupati",
-    liveUrl: "#",
+    githubUrl: "https://github.com/AnantTirupati/nutrisafe",
+    liveUrl: "https://nutrisafe-rust.vercel.app/",
   },
   {
     id: "aigenpres",
@@ -41,8 +41,8 @@ const declassifiedMissions: MissionData[] = [
     icon: "auto_awesome",
     metricsPercent: 100,
     highlights: ["90% faster presentation creation", "Credit-based freemium model", "Custom .pptx export pipeline", "Pexels API + ImageKit CDN"],
-    githubUrl: "https://github.com/ananttirupati",
-    liveUrl: "#",
+    githubUrl: "https://github.com/AnantTirupati/AIpptGenerator",
+    liveUrl: "https://ai-ppt-generator-seven.vercel.app/",
   },
   {
     id: "roborumble",
@@ -55,8 +55,8 @@ const declassifiedMissions: MissionData[] = [
     icon: "smart_toy",
     metricsPercent: 100,
     highlights: ["4,000+ concurrent users", "Custom Admin CMS", "3D graphics with React Three Fiber", "Server-side auth guards"],
-    githubUrl: "https://github.com/ananttirupati",
-    liveUrl: "#",
+    githubUrl: "https://github.com/AnantTirupati/Roborumble3.0",
+    liveUrl: "https://roborumble.in/",
   },
 ];
 
@@ -102,7 +102,7 @@ export default function LogsPage() {
                     <span className="text-xl font-bold text-primary-fixed-dim tracking-tighter">
                       {mission.number}
                     </span>
-                    <div className="flex-1">
+                    <div className="flex-1 pr-16 xs:pr-24 sm:pr-0">
                       <h2 className="text-sm md:text-md font-bold text-on-surface uppercase tracking-wider">
                         {mission.codeName}
                       </h2>

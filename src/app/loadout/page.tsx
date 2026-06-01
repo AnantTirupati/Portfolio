@@ -200,12 +200,17 @@ export default function LoadoutPage() {
         {/* SEC_03 // TELEMETRY DATA COMMIT CHART */}
         <div className="col-span-1 lg:col-span-12 border border-outline-variant bg-surface relative corner-bracket">
           {/* Section Header */}
-          <div className="h-6 border-b border-outline-variant bg-surface-container-highest flex items-center justify-between px-3">
-            <span className="text-[10px] text-on-surface-variant font-bold tracking-widest">
+          <div className="h-auto py-1 sm:h-6 border-b border-outline-variant bg-surface-container-highest flex flex-col sm:flex-row sm:items-center justify-between px-3 gap-1">
+            <span className="text-[10px] text-on-surface-variant font-bold tracking-widest uppercase">
               SEC_03 // TELEMETRY_DATA :: GITHUB_COMMITS
             </span>
-            <div className="text-[10px] text-secondary-fixed flex items-center gap-1 font-bold">
-              <span className="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span> MOCK STATS LIVE
+            <div className="flex items-center justify-between sm:justify-end gap-3">
+              <div className="text-[9px] text-primary-fixed-dim/70 flex items-center gap-1 sm:hidden font-bold">
+                <span className="material-symbols-outlined text-[12px] animate-pulse">swipe</span> SWIPE TO INSPECT
+              </div>
+              <div className="text-[10px] text-secondary-fixed flex items-center gap-1 font-bold">
+                <span className="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span> MOCK STATS LIVE
+              </div>
             </div>
           </div>
 

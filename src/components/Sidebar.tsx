@@ -4,14 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
   onContactClick: () => void;
 }
 
-export default function Sidebar({ onContactClick }: SidebarProps) {
+export default function Sidebar({ isOpen, onClose, onContactClick }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-12 h-[calc(100vh-48px)] hidden md:flex flex-col p-4 w-64 z-40 border-r border-outline-variant bg-surface-container-low text-on-surface">
+    <aside
+      className={`fixed left-0 top-12 h-[calc(100vh-48px)] flex flex-col p-4 w-64 z-40 border-r border-outline-variant bg-surface-container-low text-on-surface transition-transform duration-300 md:translate-x-0 ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       {/* Operator Card */}
       <div className="mb-6 border border-outline-variant p-3 bg-surface-container-lowest relative">
         <div className="hud-border::before top-[-1px] left-[-1px] w-2 h-2 border-t border-l border-primary-fixed-dim absolute"></div>
@@ -35,6 +41,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
       <nav className="flex-grow flex flex-col gap-1.5 font-mono text-label-sm">
         <Link
           href="/"
+          onClick={onClose}
           className={`flex items-center gap-3 p-2.5 transition-colors duration-150 uppercase tracking-widest ${
             pathname === "/"
               ? "bg-secondary-container/10 border-l-4 border-secondary-fixed text-secondary-fixed font-bold glow-secondary"
@@ -46,6 +53,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
         </Link>
         <Link
           href="/skills"
+          onClick={onClose}
           className={`flex items-center gap-3 p-2.5 transition-colors duration-150 uppercase tracking-widest ${
             pathname === "/skills"
               ? "bg-secondary-container/10 border-l-4 border-secondary-fixed text-secondary-fixed font-bold glow-secondary"
@@ -57,6 +65,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
         </Link>
         <Link
           href="/logs"
+          onClick={onClose}
           className={`flex items-center gap-3 p-2.5 transition-colors duration-150 uppercase tracking-widest ${
             pathname === "/logs"
               ? "bg-secondary-container/10 border-l-4 border-secondary-fixed text-secondary-fixed font-bold glow-secondary"
@@ -68,6 +77,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
         </Link>
         <Link
           href="/loadout"
+          onClick={onClose}
           className={`flex items-center gap-3 p-2.5 transition-colors duration-150 uppercase tracking-widest ${
             pathname === "/loadout"
               ? "bg-secondary-container/10 border-l-4 border-secondary-fixed text-secondary-fixed font-bold glow-secondary"
@@ -79,6 +89,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
         </Link>
         <Link
           href="/loadout#telemetry"
+          onClick={onClose}
           className="flex items-center gap-3 p-2.5 transition-all text-on-surface-variant opacity-75 hover:bg-surface-variant hover:opacity-100 uppercase tracking-widest"
         >
           <span className="material-symbols-outlined text-[18px]">query_stats</span>
@@ -92,6 +103,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
           href="https://github.com/ananttirupati"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onClose}
           className="flex-1 border border-outline-variant text-on-surface-variant py-1.5 text-center uppercase tracking-wider hover:border-primary-fixed-dim hover:text-primary-fixed-dim transition-colors text-xs"
         >
           GITHUB
@@ -100,6 +112,7 @@ export default function Sidebar({ onContactClick }: SidebarProps) {
           href="https://www.linkedin.com/in/ananttirupati/"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onClose}
           className="flex-1 border border-outline-variant text-on-surface-variant py-1.5 text-center uppercase tracking-wider hover:border-primary-fixed-dim hover:text-primary-fixed-dim transition-colors text-xs"
         >
           LINKEDIN

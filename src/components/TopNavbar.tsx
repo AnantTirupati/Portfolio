@@ -4,7 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function TopNavbar() {
+interface TopNavbarProps {
+  sidebarOpen: boolean;
+  toggleSidebar: () => void;
+}
+
+export default function TopNavbar({ sidebarOpen, toggleSidebar }: TopNavbarProps) {
   const pathname = usePathname();
   const [latency, setLatency] = useState(14);
 
@@ -21,8 +26,19 @@ export default function TopNavbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-8 h-12 border-b border-outline-variant bg-surface-container-lowest text-on-surface">
-      <div className="flex items-center gap-6">
+    <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 md:px-8 h-12 border-b border-outline-variant bg-surface-container-lowest text-on-surface">
+      <div className="flex items-center gap-3 md:gap-6">
+        {/* Mobile Menu Toggler */}
+        <button
+          onClick={toggleSidebar}
+          className="md:hidden flex items-center justify-center p-1 text-primary-fixed-dim hover:text-primary transition-colors cursor-pointer"
+          aria-label="Toggle Navigation Sidebar"
+        >
+          <span className="material-symbols-outlined text-[22px]">
+            {sidebarOpen ? "close" : "menu"}
+          </span>
+        </button>
+
         <Link href="/" className="text-label-lg font-mono font-bold text-primary-fixed-dim hover:text-primary transition-colors tracking-tighter">
           [ANANT_TIRUPATI_OS]
         </Link>
@@ -79,7 +95,7 @@ export default function TopNavbar() {
           href="https://github.com/ananttirupati"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[11px] font-mono text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase tracking-wider"
+          className="hidden sm:inline-block text-[11px] font-mono text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase tracking-wider"
           title="GitHub Profile"
         >
           GITHUB
@@ -88,7 +104,7 @@ export default function TopNavbar() {
           href="https://www.linkedin.com/in/ananttirupati/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[11px] font-mono text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase tracking-wider"
+          className="hidden sm:inline-block text-[11px] font-mono text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase tracking-wider"
           title="LinkedIn Profile"
         >
           LINKEDIN

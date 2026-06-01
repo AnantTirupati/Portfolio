@@ -162,6 +162,29 @@ const skillNodes: SkillNodeData[] = [
   },
 ];
 
+const skillGroups = [
+  {
+    category: "CORE ENGINE",
+    nodes: ["core"]
+  },
+  {
+    category: "FRONTEND BRANCH",
+    nodes: ["frontend", "react", "nextjs", "threejs"]
+  },
+  {
+    category: "BACKEND INFRA",
+    nodes: ["backend", "nodejs", "apis"]
+  },
+  {
+    category: "AI SYSTEMS",
+    nodes: ["ai", "awsbedrock", "llms"]
+  },
+  {
+    category: "DATABASE SYSTEMS",
+    nodes: ["database", "mongodb", "supabase"]
+  }
+];
+
 export default function SkillsPage() {
   const [activeNode, setActiveNode] = useState<SkillNodeData>(skillNodes[0]);
 
@@ -234,7 +257,7 @@ export default function SkillsPage() {
       {/* Main Skill Tree Area */}
       <section className="flex-grow relative bg-grid-pattern overflow-auto p-4 md:p-8 custom-scrollbar">
         {/* Radar Coordinates Overlay */}
-        <div className="absolute top-4 left-4 text-[10px] font-mono text-outline-variant opacity-60 select-none leading-relaxed">
+        <div className="absolute top-4 left-4 text-[10px] font-mono text-outline-variant opacity-60 select-none leading-relaxed hidden sm:block">
           COORD: [26.44, 80.33]
           <br />
           STATUS: ACTIVE_LINK
@@ -242,134 +265,181 @@ export default function SkillsPage() {
           NODE_COUNT: 14 / 14
         </div>
 
-        {/* Skill Tree Grid Wrapper */}
-        <div className="relative w-[1000px] h-[720px] mx-auto mt-6">
-          {/* SVG CONNECTION PATH LINES */}
-          <div className="absolute inset-0 z-0 pointer-events-none select-none">
-            <svg className="w-full h-full" style={{ strokeWidth: 2 }}>
-              {/* Lines from Core (452+48=500, 252+48=300) to main branches */}
-              {/* Core to DB: (500, 300) to (500, 480) */}
-              <line x1="500" y1="300" x2="500" y2="480" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
-              {/* Core to AI: (500, 300) to (500, 240) */}
-              <line x1="500" y1="300" x2="500" y2="240" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
-              {/* Core to FE: (500, 300) to (240, 300) */}
-              <line x1="500" y1="300" x2="240" y2="300" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
-              {/* Core to BE: (500, 300) to (760, 300) */}
-              <line x1="500" y1="300" x2="760" y2="300" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
+        {/* Responsive layout container */}
+        <div className="relative w-full max-w-[1000px] mx-auto mt-6 flex flex-col">
+          
+          {/* Mobile Skill List (md:hidden) */}
+          <div className="md:hidden w-full max-w-md mx-auto space-y-4 font-mono relative z-10">
+            {skillGroups.map((group) => (
+              <div key={group.category} className="border border-outline-variant bg-surface-container-low p-4 relative corner-bracket">
+                <h3 className="text-[11px] font-bold text-primary-fixed-dim uppercase tracking-wider mb-3 border-b border-outline-variant pb-1.5 flex justify-between items-center">
+                  <span>// {group.category}</span>
+                  <span className="w-1.5 h-1.5 bg-primary-fixed-dim/60"></span>
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {group.nodes.map((nodeId) => {
+                    const node = skillNodes.find((n) => n.id === nodeId);
+                    if (!node) return null;
+                    const isCompleted = node.status === "completed";
+                    const isUnlocked = node.status === "unlocked";
+                    const isLocked = node.status === "locked";
+                    const isActive = activeNode.id === node.id;
 
-              {/* Sub-lines FE (200, 300 center) to React (117, 232), Next (282, 232), Three (200, 412) */}
-              <line x1="200" y1="300" x2="117" y2="232" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
-              <line x1="200" y1="300" x2="282" y2="232" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
-              <line x1="200" y1="300" x2="200" y2="412" className="stroke-outline-variant" />
+                    let statusColor = "text-on-surface-variant/40 border-outline-variant bg-surface-container-lowest/50 opacity-40";
+                    if (isCompleted) statusColor = "text-secondary-fixed border-secondary-container bg-secondary-container/5 glow-secondary";
+                    if (isUnlocked) statusColor = "text-primary-container border-primary-container bg-primary-container/5 glow-primary";
 
-              {/* Sub-lines BE (800, 300 center) to Node (800, 218), APIs (800, 412) */}
-              <line x1="800" y1="300" x2="800" y2="218" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
-              <line x1="800" y1="300" x2="800" y2="412" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
-
-              {/* Sub-lines AI (500, 180 center) to AWS Bedrock (410, 162), LLMs (570, 162) */}
-              <line x1="500" y1="180" x2="410" y2="162" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
-              <line x1="500" y1="180" x2="570" y2="162" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
-
-              {/* Sub-lines DB (500, 520 center) to MongoDB (410, 502), Supabase (570, 502) */}
-              <line x1="500" y1="520" x2="410" y2="502" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
-              <line x1="500" y1="520" x2="570" y2="502" className="stroke-outline-variant" />
-            </svg>
+                    return (
+                      <button
+                        key={node.id}
+                        disabled={isLocked}
+                        onClick={() => setActiveNode(node)}
+                        className={`w-full text-left p-2 border text-[11px] font-bold transition-all flex flex-col justify-between min-h-[64px] ${statusColor} ${
+                          isActive ? "ring-1 ring-primary-container scale-[1.02]" : ""
+                        } ${!isLocked ? "cursor-pointer" : "cursor-not-allowed"}`}
+                      >
+                        <span className="truncate">{node.title}</span>
+                        <span className="text-[8px] uppercase tracking-widest text-right mt-2 font-mono opacity-80">
+                          {isCompleted ? "MASTERED" : isUnlocked ? "ACTIVE" : "LOCKED"}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* DYNAMIC NODES RENDER */}
-          {skillNodes.map((node) => {
-            const isCompleted = node.status === "completed";
-            const isUnlocked = node.status === "unlocked";
-            const isLocked = node.status === "locked";
-            const isActiveHover = activeNode.id === node.id;
+          {/* Desktop Skill Tree View (md:block) */}
+          <div className="hidden md:block relative w-[1000px] h-[720px] mx-auto z-10">
+            {/* SVG CONNECTION PATH LINES */}
+            <div className="absolute inset-0 z-0 pointer-events-none select-none">
+              <svg className="w-full h-full" style={{ strokeWidth: 2 }}>
+                {/* Lines from Core (452+48=500, 252+48=300) to main branches */}
+                {/* Core to DB: (500, 300) to (500, 480) */}
+                <line x1="500" y1="300" x2="500" y2="480" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
+                {/* Core to AI: (500, 300) to (500, 240) */}
+                <line x1="500" y1="300" x2="500" y2="240" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
+                {/* Core to FE: (500, 300) to (240, 300) */}
+                <line x1="500" y1="300" x2="240" y2="300" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
+                {/* Core to BE: (500, 300) to (760, 300) */}
+                <line x1="500" y1="300" x2="760" y2="300" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
 
-            let statusBorder = "border-outline-variant";
-            if (isCompleted) statusBorder = "border-secondary-container shadow-[0_0_8px_rgba(129,255,30,0.3)] bg-surface-container-low/90";
-            if (isUnlocked) statusBorder = "border-primary-container shadow-[0_0_8px_rgba(0,229,255,0.2)] bg-surface-container-low/90";
-            if (isLocked) statusBorder = "border-outline-variant bg-surface-container-lowest/50 opacity-40 grayscale";
+                {/* Sub-lines FE (200, 300 center) to React (117, 232), Next (282, 232), Three (200, 412) */}
+                <line x1="200" y1="300" x2="117" y2="232" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
+                <line x1="200" y1="300" x2="282" y2="232" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
+                <line x1="200" y1="300" x2="200" y2="412" className="stroke-outline-variant" />
 
-            return (
-              <div
-                key={node.id}
-                onMouseEnter={() => !isLocked && setActiveNode(node)}
-                style={{ top: node.top, left: node.left }}
-                className={`absolute select-none font-mono flex flex-col items-center justify-center border-2 transition-all duration-200 ${node.width} ${node.height} ${statusBorder} ${
-                  !isLocked ? "cursor-pointer hover:scale-105" : "cursor-not-allowed"
-                } ${isActiveHover ? "scale-105 border-primary shadow-[0_0_15px_#00e5ff]" : ""}`}
-              >
-                {/* Corner indicators for primary core element */}
-                {node.id === "core" && (
-                  <>
-                    <div className="hud-corner tl"></div>
-                    <div className="hud-corner tr"></div>
-                    <div className="hud-corner bl"></div>
-                    <div className="hud-corner br"></div>
-                  </>
-                )}
+                {/* Sub-lines BE (800, 300 center) to Node (800, 218), APIs (800, 412) */}
+                <line x1="800" y1="300" x2="800" y2="218" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
+                <line x1="800" y1="300" x2="800" y2="412" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
 
-                {/* Render icons or titles */}
-                {node.icon ? (
-                  <>
+                {/* Sub-lines AI (500, 180 center) to AWS Bedrock (410, 162), LLMs (570, 162) */}
+                <line x1="500" y1="180" x2="410" y2="162" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
+                <line x1="500" y1="180" x2="570" y2="162" className="stroke-primary-container filter drop-shadow-[0_0_4px_#00e5ff]" />
+
+                {/* Sub-lines DB (500, 520 center) to MongoDB (410, 502), Supabase (570, 502) */}
+                <line x1="500" y1="520" x2="410" y2="502" className="stroke-secondary-container filter drop-shadow-[0_0_4px_#81ff1e]" />
+                <line x1="500" y1="520" x2="570" y2="502" className="stroke-outline-variant" />
+              </svg>
+            </div>
+
+            {/* DYNAMIC NODES RENDER */}
+            {skillNodes.map((node) => {
+              const isCompleted = node.status === "completed";
+              const isUnlocked = node.status === "unlocked";
+              const isLocked = node.status === "locked";
+              const isActiveHover = activeNode.id === node.id;
+
+              let statusBorder = "border-outline-variant";
+              if (isCompleted) statusBorder = "border-secondary-container shadow-[0_0_8px_rgba(129,255,30,0.3)] bg-surface-container-low/90";
+              if (isUnlocked) statusBorder = "border-primary-container shadow-[0_0_8px_rgba(0,229,255,0.2)] bg-surface-container-low/90";
+              if (isLocked) statusBorder = "border-outline-variant bg-surface-container-lowest/50 opacity-40 grayscale";
+
+              return (
+                <div
+                  key={node.id}
+                  onMouseEnter={() => !isLocked && setActiveNode(node)}
+                  style={{ top: node.top, left: node.left }}
+                  className={`absolute select-none font-mono flex flex-col items-center justify-center border-2 transition-all duration-200 ${node.width} ${node.height} ${statusBorder} ${
+                    !isLocked ? "cursor-pointer hover:scale-105" : "cursor-not-allowed"
+                  } ${isActiveHover ? "scale-105 border-primary shadow-[0_0_15px_#00e5ff]" : ""}`}
+                >
+                  {/* Corner indicators for primary core element */}
+                  {node.id === "core" && (
+                    <>
+                      <div className="hud-corner tl"></div>
+                      <div className="hud-corner tr"></div>
+                      <div className="hud-corner bl"></div>
+                      <div className="hud-corner br"></div>
+                    </>
+                  )}
+
+                  {/* Render icons or titles */}
+                  {node.icon ? (
+                    <>
+                      <span
+                        className={`material-symbols-outlined text-[28px] mb-1 ${
+                          isCompleted ? "text-secondary-fixed" : "text-primary-container"
+                        }`}
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        {node.icon}
+                      </span>
+                      <span className="text-[10px] font-bold tracking-tighter text-center px-1">
+                        {node.title}
+                      </span>
+                    </>
+                  ) : (
                     <span
-                      className={`material-symbols-outlined text-[28px] mb-1 ${
-                        isCompleted ? "text-secondary-fixed" : "text-primary-container"
+                      className={`text-[11px] font-bold text-center px-1.5 ${
+                        isCompleted ? "text-secondary-container" : isUnlocked ? "text-primary-container" : "text-on-surface-variant"
                       }`}
-                      style={{ fontVariationSettings: "'FILL' 1" }}
                     >
-                      {node.icon}
-                    </span>
-                    <span className="text-[10px] font-bold tracking-tighter text-center px-1">
                       {node.title}
                     </span>
-                  </>
-                ) : (
-                  <span
-                    className={`text-[11px] font-bold text-center px-1.5 ${
-                      isCompleted ? "text-secondary-container" : isUnlocked ? "text-primary-container" : "text-on-surface-variant"
-                    }`}
-                  >
-                    {node.title}
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
 
-        {/* Info Panel overlay (Absolute position bottom-right or overlaying layout) */}
-        <div className="absolute bottom-6 right-6 w-80 bg-surface-container-high border border-outline-variant p-5 hud-border z-30 font-mono shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-          <div className="hud-corner tl"></div>
-          <div className="hud-corner tr"></div>
-          <div className="hud-corner bl"></div>
-          <div className="hud-corner br"></div>
-          
-          <div className="flex items-center gap-2 mb-3 border-b border-surface-container-highest pb-2.5 text-xs text-on-surface-variant font-bold uppercase tracking-wider">
-            <span className="material-symbols-outlined text-primary-container text-[16px]">info</span>
-            NODE STATS INSPECTOR
+          {/* Info Panel overlay (Absolute position bottom-right on desktop, inline relative on mobile) */}
+          <div className="relative md:absolute mt-6 md:mt-0 md:bottom-6 md:right-6 w-full max-w-md md:w-85 mx-auto bg-surface-container-high border border-outline-variant p-5 hud-border z-30 font-mono shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            <div className="hud-corner tl"></div>
+            <div className="hud-corner tr"></div>
+            <div className="hud-corner bl"></div>
+            <div className="hud-corner br"></div>
+            
+            <div className="flex items-center gap-2 mb-3 border-b border-surface-container-highest pb-2.5 text-xs text-on-surface-variant font-bold uppercase tracking-wider">
+              <span className="material-symbols-outlined text-primary-container text-[16px]">info</span>
+              NODE STATS INSPECTOR
+            </div>
+            
+            <h3 className="text-lg font-bold text-primary-fixed-dim mb-1 uppercase tracking-wider">
+              {activeNode.title}
+            </h3>
+            
+            <p className="text-xs text-on-surface-variant leading-relaxed min-h-[50px] mb-4">
+              {activeNode.desc}
+            </p>
+            
+            <div className="flex justify-between items-center bg-surface-container-lowest p-2 border border-surface-container-highest">
+              <span className="text-[10px] text-outline font-bold uppercase tracking-widest">INTEGRATION STATE</span>
+              <span
+                className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm ${
+                  activeNode.status === "completed"
+                    ? "text-secondary-container glow-text-secondary"
+                    : activeNode.status === "unlocked"
+                    ? "text-primary-container glow-text-primary animate-pulse"
+                    : "text-on-surface-variant"
+                }`}
+              >
+                {activeNode.status === "completed" ? "MASTERED" : activeNode.status === "unlocked" ? "ACTIVE" : "LOCKED"}
+              </span>
+            </div>
           </div>
-          
-          <h3 className="text-lg font-bold text-primary-fixed-dim mb-1 uppercase tracking-wider">
-            {activeNode.title}
-          </h3>
-          
-          <p className="text-xs text-on-surface-variant leading-relaxed min-h-[50px] mb-4">
-            {activeNode.desc}
-          </p>
-          
-          <div className="flex justify-between items-center bg-surface-container-lowest p-2 border border-surface-container-highest">
-            <span className="text-[10px] text-outline font-bold uppercase tracking-widest">INTEGRATION STATE</span>
-            <span
-              className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm ${
-                activeNode.status === "completed"
-                  ? "text-secondary-container glow-text-secondary"
-                  : activeNode.status === "unlocked"
-                  ? "text-primary-container glow-text-primary animate-pulse"
-                  : "text-on-surface-variant"
-              }`}
-            >
-              {activeNode.status === "completed" ? "MASTERED" : activeNode.status === "unlocked" ? "ACTIVE" : "LOCKED"}
-            </span>
-          </div>
+
         </div>
       </section>
     </div>
